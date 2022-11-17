@@ -3,18 +3,20 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { FileImporterModule } from './file-importer/file-importer.module';
+import { MulterModule } from "@nestjs/platform-express";
 
 @Module({
   imports: [
+    MulterModule.register(),
     FileImporterModule,
     TypeOrmModule.forRoot(
     {
       type: 'mysql',
-      host: process.env.DB_HOST,
+      host: 'localhost',
       port: 3306,
-      username: process.env.DB_USER,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME,
+      username: 'root',
+      password: 'password',
+      database: 'http_test',
       autoLoadEntities: true,
       synchronize: true,
     }

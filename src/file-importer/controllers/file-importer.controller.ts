@@ -5,13 +5,12 @@ import {
   Body,
   Patch,
   Param,
-  Delete,
-} from '@nestjs/common';
+  Delete
+} from "@nestjs/common";
 import { CreateFileDto } from '../dto/create-file.dto';
 import { UpdateFileDto } from '../dto/update-file.dto';
 import { FilesService } from '../services/files.service';
-
-@Controller('skills')
+@Controller('file-importer')
 export class FileImporterController {
   constructor(private readonly filesService: FilesService) {}
 
@@ -25,9 +24,9 @@ export class FileImporterController {
     return this.filesService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.filesService.findOne(+id);
+  @Get(':file64base')
+  findOne(@Param('file64base') base64: string) {
+    return this.filesService.findOne(base64);
   }
 
   @Patch(':id')
